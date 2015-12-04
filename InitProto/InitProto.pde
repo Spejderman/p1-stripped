@@ -71,6 +71,8 @@ PImage colorButton2;
 PImage colorButton3;
 PImage colorButton4;
 PImage colorButton5;
+PImage colorButton5_2;
+PImage colorButton5_3;
 PImage glowButton;
 PImage gridOverlay;
 PImage gridGuidanceDrums;
@@ -142,6 +144,8 @@ void setup() {
   colorButton3 = loadImage("button_colored_3.png");
   colorButton4 = loadImage("button_colored_4.png");
   colorButton5 = loadImage("button_colored_5.png");
+  colorButton5_2 = loadImage("button_colored_5_2.png");
+  colorButton5_3 = loadImage("button_colored_5_3.png");
   glowButton = loadImage("button_glow.png");
   gridOverlay = loadImage("grid_overlay.png");
   gridGuidanceDrums = loadImage("grid_guidance_drums.png");
@@ -256,8 +260,9 @@ void setup() {
       //melodies[i][j]._alpha = alphaAmount;    BGAlpha
       melodies[i][j]._tint = melodyTint;
       melodies[i][j]._tint1 = melodyTint1;
-      melodyTint-=20;
-      melodyTint1-=5;
+        melodyTint-=10;
+        melodyTint1-=25;
+      
 
       yPos += 40;
       //alphaAmount -= 10;   BGAlpha
@@ -319,6 +324,7 @@ void draw() {
 
     if (kicksPush[i] == true) {
       kicks[i].play();
+      kicks[i]._buttonCol = kick;
       if (kicks[i]._kickVisual == true) {
         kickVisual = true;
       }
@@ -326,6 +332,7 @@ void draw() {
 
     if (snaresPush[i] == true) {
       snares[i].play();
+      snares[i]._buttonCol = snare;
       if (snares[i]._snareVisual == true) {
         snareVisual = true;
       }
@@ -333,6 +340,7 @@ void draw() {
 
     if (hatsPush[i] == true) {
       hats[i].play();
+      hats[i]._buttonCol = hat;
       if (hats[i]._hatVisual == true) {
         hatVisual = true;
       }
@@ -340,6 +348,7 @@ void draw() {
 
     if (percsPush[i] == true) {
       percs[i].play();
+      percs[i]._buttonCol = perc;
       if (percs[i]._percVisual == true) {
         percVisual = true;
       }
@@ -469,6 +478,12 @@ void draw() {
     hats[i].display();
     percs[i].display();
 
+    kicks[i].pushed();
+    hats[i].pushed();
+    snares[i].pushed();
+    percs[i].pushed();
+
+
     for (int j = 0; j < 11; j++) {
       melodies[i][j].display();
     }
@@ -513,9 +528,10 @@ void mouseReleased() {
 
 
       if (kicksPush[i] == true) {
-        kicks[i]._button = colorButton1;
+        kicks[i]._buttonAlpha = 255;
       } else { 
         kicks[i]._button = standardButton;
+        kicks[i]._buttonAlpha = 0;
       }
     }
 
@@ -524,9 +540,10 @@ void mouseReleased() {
 
 
       if (snaresPush[i] == true) {
-        snares[i]._button = colorButton2;
+        snares[i]._buttonAlpha = 255;
       } else { 
         snares[i]._button = standardButton;
+        snares[i]._buttonAlpha = 0;
       }
     }
 
@@ -535,9 +552,11 @@ void mouseReleased() {
 
 
       if (hatsPush[i] == true) {
-        hats[i]._button = colorButton3;
+        hats[i]._buttonCol = hat;
+        hats[i]._buttonAlpha = 255;
       } else { 
         hats[i]._button = standardButton;
+        hats[i]._buttonAlpha = 0;
       }
     }
 
@@ -546,9 +565,10 @@ void mouseReleased() {
 
 
       if (percsPush[i] == true) {
-        percs[i]._button = colorButton4;
+        percs[i]._buttonAlpha = 255;
       } else { 
         percs[i]._button = standardButton;
+        percs[i]._buttonAlpha = 0;
       }
     }
 
